@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 class="title">Museums</h1>
+
+<!-- inside container -->
+<div class="detail__museum mb-5">
+    {% for museum in museum.all %}
+    <div class="museum">
+      <span>{{forloop.counter}}</span>
+      <span><b>{{museum.name}}</b></span>
+      <span>{{museum.city}}</span>
+      <span>{{museum.painting}}</span>
+    </div>
+		{% empty %}
+    <article class="message">
+      <div class="message-header">
+        <p>No Museum Available</p>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+<!--  above about section  -->
+
+{% endblock %}

@@ -68,6 +68,16 @@ class PaintingDelete(DeleteView):
 
 
 
+class MuseumList(TemplateView):
+    template_name = "museum_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)      
+        name = self.request.GET.get("name")
+        context["museum"] = Museum.objects.all()
+        return context
+
+
 class MuseumCreate(View):
 
     def post(self, request, pk):
