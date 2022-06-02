@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.views import View # <- View class to handle requests
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
-from .models import Painting
+from .models import Painting, Museum
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -67,7 +68,14 @@ class PaintingDelete(DeleteView):
 
 
 
+class MuseumCreate(View):
 
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        city = request.POST.get("city")
+        painting = Painting.objects.get(pk=pk)
+        Museum.objects.create(name=name, city=city, painting=painting)
+        return redirect('painting_detail', pk=pk)
 
 
 
