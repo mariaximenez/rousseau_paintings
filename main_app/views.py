@@ -78,14 +78,26 @@ class MuseumList(TemplateView):
         return context
 
 
-class MuseumCreate(View):
+class MuseumCreate(TemplateView):
+    model = Museum
+    fields = ['name', 'city', 'painting']
+    template_name = "museum_create.html"
+    
+    def get_success_url(self):
+        return reverse('museum_create', kwargs={'pk': self.object.pk})
 
-    def post(self, request, pk):
-        name = request.POST.get("name")
-        city = request.POST.get("city")
-        painting = Painting.objects.get(pk=pk)
-        Museum.objects.create(name=name, city=city, painting=painting)
-        return redirect('painting_detail', pk=pk)
+
+
+
+
+
+
+    # def post(self, request, pk):
+    #     name = request.POST.get("name")
+    #     city = request.POST.get("city")
+    #     painting = Painting.objects.get(pk=pk)
+    #     Museum.objects.create(name=name, city=city, painting=painting)
+    #     return redirect('museum_list', pk=pk)
 
 
 

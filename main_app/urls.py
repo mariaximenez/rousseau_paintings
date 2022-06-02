@@ -10,7 +10,7 @@ urlpatterns = [
     path('paintings/<int:pk>/update',views.PaintingUpdate.as_view(), name="painting_update"),
     path('paintings/<int:pk>/delete',views.PaintingDelete.as_view(), name="painting_delete"),
     path('museums/', views.MuseumList.as_view(), name="museum_list"),
-    path('paintings/<int:pk>/museum/new', views.MuseumCreate.as_view(), name="museum_create"),
+    path('museums/new/', views.MuseumCreate.as_view(), name="museum_create"),
 ]
     
 

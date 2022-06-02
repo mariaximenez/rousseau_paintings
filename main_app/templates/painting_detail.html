@@ -18,35 +18,7 @@
         </a>
     </div>
     </div>
-    <!-- inside container -->
-  <div class="detail__museum mb-5">
-    <h3 class="title is-3">Museum</h3>
-    <form class="mb-5" action="{% url 'museum_create' painting.pk %}" method="post">
-        {% csrf_token %}
-        <div class="field has-addons">
-            <div class="control">
-                <input
-                    class="input"
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    required
-                />
-            </div>
-            <div class="control">
-                <input
-                    class="input"
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                    required
-                />
-            </div>
-            <div class="control">
-                <input class="button is-primary" type="submit" value="Add Museum" />
-            </div>
-        </div>
-    </form>
+    
     {% for museum in painting.museum.all %}
     <div class="museum">
       <span>{{forloop.counter}}</span>
