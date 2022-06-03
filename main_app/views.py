@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.views import View # <- View class to handle requests
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
-from .models import Painting, Museum
+from .models import Painting, Museum, Museumschedule
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -13,12 +13,15 @@ from django.urls import reverse
 # Here we will be creating a class called Home and extending it from the View class
 class Home(TemplateView):
         template_name="home.html"
-
+        
 
 
 class About(TemplateView):
          template_name="about.html"
-
+         def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context["museumschedules"] = Museumschedule.objects.all()
+            return context
 
 
 class PaintingList(TemplateView):
@@ -50,6 +53,8 @@ class PaintingDetail(DetailView):
     model = Painting
     template_name = "painting_detail.html"
 
+    
+
 
 class PaintingUpdate(UpdateView):
     model = Painting
@@ -77,6 +82,8 @@ class MuseumList(TemplateView):
         context["museum"] = Museum.objects.all()
         return context
 
+   
+
 
 class MuseumCreate(TemplateView):
     model = Museum
@@ -88,6 +95,20 @@ class MuseumCreate(TemplateView):
 
 
 
+class MuseumscheduleMuseumAssoc(View):
+
+    def get(self, request, pk, museum_pk):
+        # get the query param from the url
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            # get the playlist by the id and
+            # remove from the join table the given song_id
+            Museumschedule.objects.get(pk=pk).museums.remove(museum_pk)
+        if assoc == "add":
+            # get the playlist by the id and
+            # add to the join table the given song_id
+            Museumschedule.objects.get(pk=pk).museums.add(museum_pk)
+        return redirect('home')
 
 
 

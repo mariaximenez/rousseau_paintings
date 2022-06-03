@@ -1,4 +1,34 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% block content %}
-<h1>Rousseau About</h1>
+<div class="home__museumschedule">
+    <h1>NYC Museum Schedule</h1>
+    {% for museumschedule in museumschedules %}
+
+        <div class="playlist mb-5">
+            <h3 class="title is-3 has-text-success">{{museumschedule.name}}</h3>
+            <hr />
+
+            {% for museum in museumschedule.museums.all %}
+
+                <div class="museum">
+                    <span>{{forloop.counter}}</span>
+                    <span><b>{{museum.name}}</b></span>
+                    <span>{{museum.painting}}</span>
+                    <span>
+                        <a href="{% url 'museumschedule_museum_assoc' museumschedule.pk museum.pk %}?assoc=remove" class="button is-danger is-outlined">
+                        <span class="icon is-small">
+                            <i class="fas fa-times"></i>
+                        </span>
+                        </a>
+                    </span>
+
+                </div>
+
+            {% endfor %}
+        </div>
+    {% empty %} 
+        <div class="museumschedule mb-5">"There are no museums in this schedule"</div>
+    {% endfor %}
+</div>
+
 {% endblock %}

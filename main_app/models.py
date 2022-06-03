@@ -26,3 +26,17 @@ class Museum(models.Model):
     def __str__(self):
         return self.name
 
+
+
+
+
+class Museumschedule(models.Model):
+
+    name = models.CharField(max_length=150)
+    # this is going to create the many to many relationship and join table
+    museums = models.ManyToManyField(Museum)
+
+    def __str__(self):
+        return self.name
+
+

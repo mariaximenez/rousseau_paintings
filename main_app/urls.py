@@ -11,6 +11,7 @@ urlpatterns = [
     path('paintings/<int:pk>/delete',views.PaintingDelete.as_view(), name="painting_delete"),
     path('museums/', views.MuseumList.as_view(), name="museum_list"),
     path('museums/new/', views.MuseumCreate.as_view(), name="museum_create"),
+    path('museumschedules/<int:pk>/museums/<int:song_pk>/', views.MuseumscheduleMuseumAssoc.as_view(), name="museumschedule_museum_assoc"),
 ]
     
 
