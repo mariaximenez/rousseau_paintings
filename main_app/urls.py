@@ -12,6 +12,7 @@ urlpatterns = [
     path('museums/', views.MuseumList.as_view(), name="museum_list"),
     path('museums/new/', views.MuseumCreate.as_view(), name="museum_create"),
     path('museumschedules/<int:pk>/museums/<int:song_pk>/', views.MuseumscheduleMuseumAssoc.as_view(), name="museumschedule_museum_assoc"),
+    path('accounts/signup/', views.Signup.as_view(), name="signup"),
 ]
     
 
